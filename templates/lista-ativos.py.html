@@ -1,0 +1,26 @@
+{% extends 'ativos.html' %}
+
+{% block content %}
+{% for i in itens %}
+<div class="col-12 mb-2">
+
+    <a href="qrcode?id={{ i.id }}">
+        <div class="card shadow border-left-primary py-2 md-5">
+            <div class="card-body">
+                <div class="row align-items-center no-gutters">
+                    <div class="col-4 d-table mr-2">
+                        <div class="text-uppercase text-primary font-weight-bold text-xs mb-1"><span>{{ i.nome }}</span></div>
+                        <div class="text-dark font-weight-bold h5 mb-0"><span>{{ i.qtde }}</span><span class="ml-2">acessos</span></div>
+                    </div>
+                    <div class="col mr-2">
+                        <div class="text-black-50 font-weight-bold h6 mb-0"><span>{{ i.url_interno }}</span></div>
+                        <div class="text-black-50 font-weight-bold h6 mb-0 ml-3"><i class="fa fa-long-arrow-right"></i><span>{{ i.url_redirecionado }}</span></div>
+                    </div>
+                    <div class="col-auto"><i class="fas fa-angle-double-right fa-2x text-gray-300"></i></div>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,204 @@
+{% extends 'base.py.html' %}
+
+{% block title %}Perfil - QrFox{% endblock %}
+{% block body %}
+<body id="page-top">
+    <div id="wrapper">
+        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+            <div class="container-fluid d-flex flex-column p-0">
+                <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="ativos">
+                    <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-qrcode"></i></div>
+                    <div class="sidebar-brand-text mx-3"><span>QrFox</span></div>
+                </a>
+                <hr class="sidebar-divider my-0">
+                <ul class="nav navbar-nav text-light" id="accordionSidebar">
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="ativos"><i class="fas fa-fire"></i><span>Ativos</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="inativos"><i class="fas fa-exclamation-triangle"></i><span>Inativos</span></a></li>
+                </ul>
+                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+            </div>
+        </nav>
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
+                        <form class="form-inline d-none d-sm-inline-block mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+                            action="pesquisa" method="get">
+                            <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Pesquisar por ..." name="search">
+                                <div class="input-group-append"><button class="btn btn-primary py-0" type="submit"><i class="fas fa-search"></i></button></div>
+                            </div>
+                        </form>
+                        <ul class="nav navbar-nav flex-nowrap ml-auto">
+                            <li class="nav-item dropdown d-sm-none no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><i class="fas fa-search"></i></a>
+                                <div class="dropdown-menu dropdown-menu-right p-3 animated--grow-in" role="menu" aria-labelledby="searchDropdown">
+                                    <form class="form-inline mr-auto navbar-search w-100">
+                                        <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for ...">
+                                            <div class="input-group-append"><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown no-arrow mx-1" role="presentation"></li>
+                            <li class="nav-item dropdown no-arrow mx-1" role="presentation" style="margin: 20px;">
+                                <div class="shadow dropdown-list dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown"></div>
+                            </li>
+                            <div class="d-none d-sm-block topbar-divider"></div>
+                            <li class="nav-item d-flex align-items-center dropdown no-arrow" role="presentation">
+                                <div class="nav-item dropdown no-arrow"><button class="btn btn-primary dropdown-toggle text-center d-flex" data-toggle="dropdown" aria-expanded="false" type="button"><span class="d-lg-inline mr-2 text-white-600 small" id="nome_usuario" name="nome_usuario">Valerie Luna</span></button>
+                                    <div
+                                        class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu"><a class="dropdown-item" role="presentation" href="profile"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Perfil</a>
+                                        <div class="dropdown-divider"></div><a class="dropdown-item" role="presentation" href="logout"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Sair</a></div>
+                    </div>
+                    </li>
+                    </ul>
+            </div>
+            </nav>
+            <div class="container-fluid">
+                <h3 class="text-dark mb-4">Perfil</h3><span class="text-success msg-suc"></span><span class="text-danger msg-fail"></span>
+                <div class="row mb-3">
+                    <div class="col-lg-4 sr-only">
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="text-primary font-weight-bold m-0">Seus projetos</h6>
+                            </div>
+                            <div class="card-body">
+                                <h4 class="small font-weight-bold">Server migration<span class="float-right">20%</span></h4>
+                                <div class="progress progress-sm mb-3">
+                                    <div class="progress-bar bg-danger" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%;"><span class="sr-only">20%</span></div>
+                                </div>
+                                <h4 class="small font-weight-bold">Sales tracking<span class="float-right">40%</span></h4>
+                                <div class="progress progress-sm mb-3">
+                                    <div class="progress-bar bg-warning" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%;"><span class="sr-only">40%</span></div>
+                                </div>
+                                <h4 class="small font-weight-bold">Customer Database<span class="float-right">60%</span></h4>
+                                <div class="progress progress-sm mb-3">
+                                    <div class="progress-bar bg-primary" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"><span class="sr-only">60%</span></div>
+                                </div>
+                                <h4 class="small font-weight-bold">Payout Details<span class="float-right">80%</span></h4>
+                                <div class="progress progress-sm mb-3">
+                                    <div class="progress-bar bg-info" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;"><span class="sr-only">80%</span></div>
+                                </div>
+                                <h4 class="small font-weight-bold">Account setup<span class="float-right">Complete!</span></h4>
+                                <div class="progress progress-sm mb-3">
+                                    <div class="progress-bar bg-success" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"><span class="sr-only">100%</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="row mb-3 d-none">
+                            <div class="col">
+                                <div class="card text-white bg-primary shadow">
+                                    <div class="card-body">
+                                        <div class="row mb-2">
+                                            <div class="col">
+                                                <p class="m-0">Peformance</p>
+                                                <p class="m-0"><strong>65.2%</strong></p>
+                                            </div>
+                                            <div class="col-auto"><i class="fas fa-rocket fa-2x"></i></div>
+                                        </div>
+                                        <p class="text-white-50 small m-0"><i class="fas fa-arrow-up"></i>&nbsp;5% since last month</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card text-white bg-success shadow">
+                                    <div class="card-body">
+                                        <div class="row mb-2">
+                                            <div class="col">
+                                                <p class="m-0">Peformance</p>
+                                                <p class="m-0"><strong>65.2%</strong></p>
+                                            </div>
+                                            <div class="col-auto"><i class="fas fa-rocket fa-2x"></i></div>
+                                        </div>
+                                        <p class="text-white-50 small m-0"><i class="fas fa-arrow-up"></i>&nbsp;5% since last month</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="card shadow mb-3">
+                                    <div class="card-header py-3">
+                                        <p class="text-primary m-0 font-weight-bold">Configurações do usuário</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <form action="attprofile" method="get">
+                                            <div class="form-row">
+                                                <div class="col">
+                                                    <div class="form-group"><label for="email"><strong>Endereço de e-mail</strong></label><input class="form-control" type="email" placeholder="user@example.com" name="email" disabled="" value="{{ email }}"></div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col">
+                                                    <div class="form-group"><label for="first_name"><strong>Nome</strong><br></label><input class="form-control" type="text" id="first_name" placeholder="Sobrenome" name="first_name" value="first_name"></div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-group"><label for="last_name"><strong>Sobrenome</strong></label><input class="form-control" type="text" id="last_name" placeholder="Sobrenome" name="last_name" value="last_name"></div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Salvar</button></div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="card shadow" hidden="true">
+                                    <div class="card-header py-3">
+                                        <p class="text-primary m-0 font-weight-bold">Informações para contato</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <form>
+                                            <div class="form-group"><label for="address"><strong>Address</strong></label><input class="form-control" type="text" placeholder="Sunset Blvd, 38" name="address"></div>
+                                            <div class="form-row">
+                                                <div class="col">
+                                                    <div class="form-group"><label for="city"><strong>City</strong></label><input class="form-control" type="text" placeholder="Los Angeles" name="city"></div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-group"><label for="country"><strong>Country</strong></label><input class="form-control" type="text" placeholder="USA" name="country"></div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Save&nbsp;Settings</button></div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card shadow mb-5">
+                    <div class="card-header py-3">
+                        <p class="text-primary m-0 font-weight-bold">Alterar senha</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <form action="attprofile" method="post">
+                                    {% csrf_token %}
+                                    <div class="form-group"><input class="form-control" type="password" name="senha" placeholder="Senha atual"></div><label for="city"><strong>Altere sua senha aqui</strong></label>
+                                    <div class="form-group"><input class="form-control" type="password" name="nova-senha" placeholder="Nova senha"></div>
+                                    <div class="form-group"><input class="form-control" type="password" name="repita-senha" placeholder="Repita a senha" required=""></div>
+                                    <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Alterar senha</button></div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card shadow mb-5">
+                    <div class="card-header py-3">
+                        <p class="text-danger m-0 font-weight-bold">Apagar conta</p>
+                    </div>
+                    <div class="card-body"><label for="city"><strong>Caso não deseje mais utilizar nossos serviços, você poderá clicar abaixo para apagar sua conta.</strong><br></label><label for="city"><strong>Tenha em mente que seus dados não poderão ser recuperados após essa ação!<br>Entre em contato com suporte@articfox.com.br para realizar esta ação.</strong><br></label>
+                        <div
+                            class="row">
+                            <div class="col-md-6"><button class="btn btn-danger btn-sm disabled" type="button">Apagar conta</button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="bg-white sticky-footer">
+        <div class="container my-auto">
+            <div class="text-center my-auto copyright"><span>Copyright © QrFox 2019</span></div>
+        </div>
+    </footer>
+    </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a></div>
+{% endblock %}

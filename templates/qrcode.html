@@ -1,0 +1,183 @@
+{% extends 'base.py.html' %}
+
+{% block title %}QrCode - QrFox{% endblock %}
+{% block body %}
+<body id="page-top">
+    <div id="wrapper">
+        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+            <div class="container-fluid d-flex flex-column p-0">
+                <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="ativos">
+                    <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-qrcode"></i></div>
+                    <div class="sidebar-brand-text mx-3"><span>QrFox</span></div>
+                </a>
+                <hr class="sidebar-divider my-0">
+                <ul class="nav navbar-nav text-light" id="accordionSidebar">
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="ativos"><i class="fas fa-fire"></i><span>Ativos</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="inativos"><i class="fas fa-exclamation-triangle"></i><span>Inativos</span></a></li>
+                </ul>
+                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+            </div>
+        </nav>
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
+                        <form class="form-inline d-none d-sm-inline-block mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+                            action="pesquisa" method="get">
+                            <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Pesquisar por ..." name="search">
+                                <div class="input-group-append"><button class="btn btn-primary py-0" type="submit"><i class="fas fa-search"></i></button></div>
+                            </div>
+                        </form>
+                        <ul class="nav navbar-nav flex-nowrap ml-auto">
+                            <li class="nav-item dropdown d-sm-none no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><i class="fas fa-search"></i></a>
+                                <div class="dropdown-menu dropdown-menu-right p-3 animated--grow-in" role="menu" aria-labelledby="searchDropdown">
+                                    <form class="form-inline mr-auto navbar-search w-100">
+                                        <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for ...">
+                                            <div class="input-group-append"><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown no-arrow mx-1" role="presentation"></li>
+                            <li class="nav-item dropdown no-arrow mx-1" role="presentation" style="margin: 20px;">
+                                <div class="shadow dropdown-list dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown"></div>
+                            </li>
+                            <div class="d-none d-sm-block topbar-divider"></div>
+                            <li class="nav-item d-flex align-items-center dropdown no-arrow" role="presentation">
+                                <div class="nav-item dropdown no-arrow"><button class="btn btn-primary dropdown-toggle text-center d-flex" data-toggle="dropdown" aria-expanded="false" type="button"><span class="d-lg-inline mr-2 text-white-600 small" id="nome_usuario" name="nome_usuario">Valerie Luna</span></button>
+                                    <div
+                                        class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu"><a class="dropdown-item" role="presentation" href="profile"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Perfil</a>
+                                        <div class="dropdown-divider"></div><a class="dropdown-item" role="presentation" href="logout"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Sair</a></div>
+                    </div>
+                    </li>
+                    </ul>
+            </div>
+            </nav>
+            <div class="container-fluid">
+                <div class="d-sm-flex justify-content-between align-items-center mb-4">
+                    <h3 class="text-dark mb-0">{{ data.nome }}</h3>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-xl-3 mb-4"><img class="img-fluid" src="{{ MEDIA_URL }}{{ data.caminho }}" width="100%"></div>
+                    <div class="col mb-4">
+                        <div class="row">
+                            <div class="col"><a class="btn btn-primary btn-sm d-sm-inline-block
+                                {% if not data.ativo %}
+                                disabled
+                                {% endif %}" role="button" href="{{ MEDIA_URL }}{{ data.caminho }}" download="qrcode_{{ data.nome }}.png"><i class="fas fa-download fa-sm text-white-50"></i>&nbsp;Baixar QrCode</a></div>
+                            <div class="col text-right"><a class="btn btn-secondary d-sm-inline-block" role="button" href="desativar?id={{ data.id }}"><i class="fas fa-exclamation-circle fa-sm text-white-50"></i>&nbsp;Desativar QrCode</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-xl-3 mb-4">
+                        <div class="card shadow border-left-primary py-2">
+                            <div class="card-body">
+                                <div class="row align-items-center no-gutters">
+                                    <div class="col mr-2">
+                                        <div class="text-uppercase text-primary font-weight-bold text-xs mb-1"><span>Acessos</span></div>
+                                        <div class="text-dark font-weight-bold h5 mb-0"><span>{{ data.qtde_acessos }}</span></div>
+                                    </div>
+                                    <div class="col-auto"><i class="fas fa-sort-amount-up fa-2x text-gray-300"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-4 mb-4">
+                        <div class="card shadow border-left-success py-2">
+                            <div class="card-body">
+                                <div class="row align-items-center no-gutters">
+                                    <div class="col mr-2">
+                                        <div class="text-uppercase text-success font-weight-bold text-xs mb-1"><span>link</span></div>
+                                        <div class="text-dark font-weight-bold h5 mb-0"><a href="{{ data.url_interno }}">{{ data.url_interno }}</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-5 mb-4">
+                        <div class="card shadow border-left-info py-2">
+                            <div class="card-body">
+                                <div class="row align-items-center no-gutters">
+                                    <div class="col mr-2">
+                                        <div class="text-uppercase text-info font-weight-bold text-xs mb-1"><span>redireciona para</span></div>
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col-auto">
+                                                <div class="text-dark font-weight-bold h5 mb-0 mr-3"><a href="{{ data.url_redirecionado}}">{{ data.url_redirecionado}}</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-7 col-xl-8">
+                        <div class="card shadow mb-4">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h6 class="text-primary font-weight-bold m-0">Acessos por dia</h6>
+                                <div class="dropdown no-arrow"><button class="btn btn-link btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false" type="button"><i class="fas fa-ellipsis-v text-gray-400"></i></button>
+                                    <div class="dropdown-menu shadow dropdown-menu-right animated--fade-in"
+                                        role="menu">
+                                        <p class="text-center dropdown-header">dropdown header:</p><a class="dropdown-item" role="presentation" href="#">&nbsp;Action</a><a class="dropdown-item" role="presentation" href="#">&nbsp;Another action</a>
+                                        <div class="dropdown-divider"></div><a class="dropdown-item" role="presentation" href="#">&nbsp;Something else here</a></div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-area"><canvas id="grafico-dia"></canvas></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-xl-4">
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="text-primary font-weight-bold m-0">Acessos por sistemas operacionais</h6>
+                            </div>
+                            <div class="card-body">
+                                {% for i in data.acessos_so %}
+                                <h4 class="small font-weight-bold">{{ i.so }}<span class="float-right">{{ i.qtde }}/{{ i.pcnt }}%</span></h4>
+                                <div class="progress progress-sm mb-3">
+                                    <div class="progress-bar bg-primary" aria-valuenow="{{ i.pcnt }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ i.pcnt }}%;"><span class="sr-only">{{ i.pcnt }}%</span></div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="bg-white sticky-footer">
+            <div class="container my-auto">
+                <div class="text-center my-auto copyright"><span>Copyright © QrFox 2019</span></div>
+            </div>
+        </footer>
+    </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a></div>
+    <div id="labels-graf" hidden="true">{{ data.grafico.label }}</div>
+    <div id="data-graf" hidden="true">{{ data.grafico.dataset }}</div>
+    
+    
+{% endblock %}
+
+{% block extrascript %}
+<script type="text/javascript">
+function arrumarGrafico() {
+    var ctx = document.getElementById("grafico-dia").getContext('2d');
+    var lb = document.getElementById("labels-graf").innerHTML;
+    var dt = document.getElementById("data-graf").innerHTML;
+    lb = JSON.parse(lb.replace(/'/g, '"'));
+    dt = JSON.parse(dt.replace(/'/g, '"'));
+    var myChart = new Chart(ctx, {
+    'type':'line',
+    'data':{
+    'labels':
+    lb,
+    'datasets':
+    [{'label':'Acessos','fill':true,
+    'data': dt,
+    'backgroundColor':'rgba(78, 115, 223, 0.05)',
+    'borderColor':'rgba(78, 115, 223, 1)'}]},'options':{'maintainAspectRatio':false,'legend':{'display':false},'title':{},'scales':{'xAxes':[{'gridLines':{'color':'rgb(234, 236, 244)','zeroLineColor':'rgb(234, 236, 244)','drawBorder':false,'drawTicks':false,'borderDash':['2'],'zeroLineBorderDash':['2'],'drawOnChartArea':false},'ticks':{'fontColor':'#858796','padding':20}}],'yAxes':[{'gridLines':{'color':'rgb(234, 236, 244)','zeroLineColor':'rgb(234, 236, 244)','drawBorder':false,'drawTicks':false,'borderDash':['2'],'zeroLineBorderDash':['2']},'ticks':{'fontColor':'#858796','padding':20}}]}}});
+    console.log(dt);
+}
+arrumarGrafico();</script>
+{% endblock %}
